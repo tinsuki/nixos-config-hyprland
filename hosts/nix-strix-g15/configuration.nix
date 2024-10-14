@@ -5,7 +5,7 @@
     [ 
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
-      ../../modules/nixos/
+      ../../modules/nixos
     ];
 
   nixpkgs.config.allowUnfree = true;

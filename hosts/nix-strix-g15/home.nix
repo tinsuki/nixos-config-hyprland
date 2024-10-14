@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
   home.username = "tinsuki";
   home.homeDirectory = "/home/tinsuki";
@@ -8,38 +7,38 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  home.packages = with pkgs[
+  home.packages = [
+    pkgs.fastfetch
+    (
+      pkgs.discord.override {
+        withVencord = true;
+      }
+    )
+    pkgs.jetbrains.clion
+    pkgs.jetbrains.goland
+    pkgs.jetbrains.webstorm
+    pkgs.jetbrains.phpstorm
+    pkgs.jetbrains.datagrip
+    pkgs.jetbrains.ruby-mine
+    pkgs.jetbrains.dataspell
+    pkgs.jetbrains.rust-rover
+    pkgs.jetbrains.idea-ultimate
+    pkgs.jetbrains.pycharm-professional
+    pkgs.android-studio
+    pkgs.android-tools
+    pkgs.android-studio-tools
+    pkgs.vscodium
+    pkgs.github-desktop
+    pkgs.postman
+    pkgs.insomnia
+    pkgs.spotify
+    pkgs.spotify-tray
 
-    fastfetch
-    (discord.override {
-      withVencord = true;
-    })
-    jetbrains.clion
-    jetbrains.goland
-    jetbrains.webstorm
-    jetbrains.phpstorm
-    jetbrains.datagrip
-    jetbrains.ruby-mine
-    jetbrains.dataspell
-    jetbrains.rust-rover
-    jetbrains.idea-ultimate
-    jetbrains.pycharm-professional
-    android-studio
-    android-tools
-    android-studio-tools
-    vscodium
-    github-desktop
-    postman
-    insomnia
-    spotify
-    spotify-tray
   ];
 
-  home.file = {
-  };
+  # home.file = {};
 
-  home.sessionVariables = {
-  };
+  # home.sessionVariables = {};
 
-  programs.home-manager.enable = true;
+  programs.home-manager.enable=true;
 }

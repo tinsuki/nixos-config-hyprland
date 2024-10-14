@@ -24,7 +24,7 @@
         nix-strix-g15 = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs;};
           modules = [
-            ./hosts/nix-strix-g15/configuration.nix;
+            ./hosts/nix-strix-g15/configuration.nix
           ];
         };
       };
