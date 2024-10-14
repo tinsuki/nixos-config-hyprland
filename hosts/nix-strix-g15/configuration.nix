@@ -4,21 +4,12 @@
   imports =
     [ 
       ./hardware-configuration.nix
-      ../default/configuration.nix
       inputs.home-manager.nixosModules.default
+      ../../modules/nixos/
     ];
-    
-  services.grub-bootloader.enable = true; 
 
-  networking.hostName = "nix-strix-g15";
-  networking.networkmanager.enable = true;
-
-  hardware = {
-    opengl.enable = true;
-    nvidia.modesetting.enable = true;
-  };
-
-  boot.kernelParams = ["nvidia-drm.modeset=1" "nvidia-drm.fbdev=1"];
+  nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   users.users.tinsuki = {
     isNormalUser = true;
@@ -34,11 +25,5 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    # Hyprland GPU accelerated screen locking utility
-    hyprlock
-    hypridle
-  ];
-
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.05";
 }

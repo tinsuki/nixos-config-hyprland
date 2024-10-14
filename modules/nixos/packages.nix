@@ -1,0 +1,44 @@
+{ config, lib, pkgs, inputs, ... }:
+{
+  environment.systemPackages = with pkgs; [
+    # Add packages here
+    vim
+    fzf
+    oh-my-posh
+    asdf
+    wget
+    zoxide
+    neovim
+    spotify
+    spotify-tray
+    lsb-release
+    btop
+    qemu
+    valgrind
+    virtualbox
+    vagrant
+    vlc
+    rustup
+    gcc
+    cmake
+    sqlite
+    ninja
+    killall
+    wlogout
+    pkgs.dunst
+    libnotify
+    grimblast
+    gnome.nautilus
+    swww
+    kitty
+    networkmanagerapplet
+    wl-clipboard
+    cliphist
+    pamixer
+    pavucontrol
+    playerctl
+    brightnessctl
+    numlockx
+    inputs.zen-browser.packages."${system}".default
+  ];
+}
