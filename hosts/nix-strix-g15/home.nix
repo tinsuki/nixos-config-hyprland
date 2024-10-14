@@ -36,7 +36,11 @@
 
   ];
 
-  # home.file = {};
+  home.file = {
+    ".config/hypr" = {
+      source = /etc/nixos/dotfiles/hypr;
+    }
+  };
 
   # home.sessionVariables = {};
 

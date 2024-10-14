@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # Add packages here
+    git
     vim
     fzf
     oh-my-posh
