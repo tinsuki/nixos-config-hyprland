@@ -1,5 +1,5 @@
 # boot.nix for grub configuration
-{ config, pkgs, options, lib, ... }:
+{ config, pkgs, lib, ... }:
 {
   boot.loader.grub = {
     enable = true;
@@ -7,6 +7,7 @@
     useOSProber = true;
     efiSupport = true;
     enableCryptodisk = false;
+    theme = /home/tinsuki/.dotfiles/catppuccin-tinsuki-grub-theme;
   };
   boot.loader.efi.canTouchEfiVariables = true;
 }

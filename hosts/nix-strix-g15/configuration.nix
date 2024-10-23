@@ -25,5 +25,11 @@
     };
   };
 
+  environment.interactiveShellInit = ''
+    export PATH=$PATH:/usr/bin
+  '';
+
+  # kitty = pkgs.callPackage ./kitty.nix { };
+
   system.stateVersion = "24.05";
 }

@@ -1,0 +1,22 @@
+# Catppuccin Macchiato
+text-color = #cad3f5aa
+prompt-color = #ed8796
+selection-color = #eed49f
+background-color = #24273aaa
+
+font-size = 22
+font = CaskaydiaCoveNerdFontPropo
+
+outline-width = 0
+border-width = 0
+padding-left = 2%
+padding-top = 1%
+padding-right = 0
+padding-bottom = 0
+
+width = 50%
+height = 50%
+
+corner-radius = 25
+
+hide-cursor = true

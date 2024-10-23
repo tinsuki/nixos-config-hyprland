@@ -5,6 +5,8 @@
     xwayland.enable = true;
   };
 
+  security.pam.services.hyprland.enableGnomeKeyring = true;
+
   environment.systemPackages = with pkgs; [
     waybar
     (pkgs.waybar.overrideAttrs (oldAttrs: {
@@ -14,5 +16,11 @@
     tofi
     hyprlock
     hypridle
+    hyprsunset
+    hyprpicker
+    swww
+    hyprlang
+    hyprutils
+    hyprcursor
   ];
 }

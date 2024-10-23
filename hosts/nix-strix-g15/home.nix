@@ -33,16 +33,49 @@
     pkgs.insomnia
     pkgs.spotify
     pkgs.spotify-tray
-
   ];
 
   home.file = {
-    ".config/hypr" = {
-      source = /etc/nixos/dotfiles/hypr;
-    }
+    ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink /home/tinsuki/.dotfiles/hypr;
+    ".config/tofi".source = config.lib.file.mkOutOfStoreSymlink /home/tinsuki/.dotfiles/tofi;
+    ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink /home/tinsuki/.dotfiles/waybar;
+    ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink /home/tinsuki/.dotfiles/fastfetch;
+    ".config/oh-my-posh".source = config.lib.file.mkOutOfStoreSymlink /home/tinsuki/.dotfiles/oh-my-posh;
+    ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink /home/tinsuki/.dotfiles/kitty;
   };
 
-  # home.sessionVariables = {};
+  programs.bash.enable = true;
+
+  programs.bash = {
+    shellAliases = {
+      l = "ls -alh";
+      ll = "ls -l";
+      ls = "ls --color=tty";
+      remove-tofi-cache = "rm /home/tinsuki/.cache/tofi-*";
+      cleart = "clear && fastfetch";
+    };
+    bashrcExtra = ''
+      eval "$(oh-my-posh init bash --config /home/tinsuki/.config/oh-my-posh/config.json)"
+    
+      if [[ -n $KITTY_WINDOW_ID && $(tput lines) -ge 43 && $(tput cols) -ge 92 ]]; then
+	      fastfetch
+      fi
+    '';
+  };
+
+  programs.oh-my-posh.enableBashIntegration = true;
+
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
+    options = [
+      "--cmd cd"
+    ];
+  };
+
+  home.sessionVariables = {
+    BROWDER = "zen";
+  };
 
   programs.home-manager.enable=true;
 }

@@ -1,0 +1,113 @@
+{
+  // icons from https://www.nerdfonts.com/cheat-sheet
+    "position": "top",
+    "margin-bottom" : 5,
+    "margin-left": 5,
+    "margin-right": 5,
+    "height" : 40,
+    "modules-left": [
+      "hyprland/workspaces"
+    ],
+    "modules-center": [
+      "hyprland/window"
+    ],
+    "modules-right": [
+    "battery",
+    "pulseaudio",
+    "network",
+    "bluetooth",
+    "cpu",
+    "temperature",
+    "memory",
+    "custom/gpu-usage",
+    "clock",
+    ],
+    "hyprland/window": {
+      "format": "{}",
+      "max-length": 64,
+      "rewrite": {
+        "": "Hyprland"
+      },
+      "separate-outputs": true,
+    },
+    "hyprland/workspaces": {
+      "format": "{icon}",
+      "on-click": "activate",
+      "format-icons": {
+        "active": "\uf111 ",
+      },
+      "sort-by-number": true,
+      "persistent-workspaces": {
+        "*": 6, // default 6 workspaces shown
+        "eDP-2": 4 // but only 4 on eDP-2
+      },
+    },
+    "clock": {
+      "interval": 1,
+      "format": "\uf017 {:%H:%M:%S}",
+      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+      "format-alt": "{:%Y-%m-%d}"
+    },
+    "cpu": {
+      "format": "\uf4bc {usage}%",
+      "tooltip": true
+    },
+    "memory": {
+      "format": "\uefc5 {}%"
+    },
+    "temperature": {
+      "critical-threshold": 80,
+      "format": "{icon} {temperatureC}°C",
+      "format-icons": ["\uf2cb", "\uf2c9", "\uf2c7"]
+    },
+    "battery": {
+      "states": {
+        "warning": 30,
+        "critical": 15
+      },
+      "format": "{icon}  {capacity}%",
+      "format-full": "{icon}  {capacity}%",
+      "format-charging": "\udb80\udc85  {capacity}%",
+      "format-plugged": "\udb84\udccd  {capacity}%",
+      "format-alt": "{time} {icon}",
+      "format-icons": ["\udb84\ude5e", "\udb80\udc7a", "\udb80\udc7b", "\udb80\udc7c", "\udb80\udc7d", "\udb80\udc7e", "\udb80\udc7f", "\udb80\udc80", "\udb80\udc81", "\udb80\udc82", "\udb80\udc79"]
+    },
+    "network": {
+      "format-wifi": "\uf1eb  {signalStrength}%",
+      "format-ethernet": "{cidr} \udb80\ude00",
+      "tooltip-format": "{ifname} via {gwaddr} \uef09",
+      "format-linked": "{ifname} (No IP) \udb81\udef5",
+      "format-disconnected": " \udb83\udc9b",
+      "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+      "format": "{icon}  {volume}%",
+      "format-bluetooth": "{volume}% {icon}\udb82\udd70 {format_source}",
+      "format-bluetooth-muted": "\ueee8 {icon} {format_source}",
+      "format-muted": "\ueee8 {format_source}",
+      "format-icons": {
+        "headphone": "\uf025",
+        "hands-free": "\udb82\udd70",
+        "headset": "\udb80\udece",
+        "phone": "\uf10b",
+        "portable": "\uf10b",
+        "car": "\uf1b9",
+        "default": ["\uf026", "\uf027", "\uf028"]
+      },
+      "on-click": "pavucontrol"
+    },
+    "custom/gpu-usage": {
+      "format": "\uf4bc {}%",
+      "exec": "cat /sys/class/hwmon/hwmon10/device/gpu_busy_percent",
+      "return-type": "",
+      "interval": 5
+    },
+    "bluetooth": {
+        "format-on": "\udb80\udcaf",
+        "format-off": "\udb80\udcb2",
+        "format-disabled": "",
+        "format-connected": "\udb80\udcb1 {num_connections}",
+        "tooltip-format-connected": "{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+    },
+}
