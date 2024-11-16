@@ -1,0 +1,3 @@
+[submodule "dotfiles"]
+	path = dotfiles
+	url = git@github.com:tinsuki/nixos-assets.git
