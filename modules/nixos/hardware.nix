@@ -1,28 +1,12 @@
 { config, lib, pkgs, inputs, ... }:
 {
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
-
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
-
-
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
     extraPackages = with pkgs; [ nvidia-vaapi-driver ];
+    enable32Bit = true;
+    extraPackages32 = with pkgs; [ nvidia-vaapi-driver ];
   };
 
   hardware.nvidia = {
@@ -49,8 +33,16 @@
     "i2c-nvidia_gpu"
   ];
 
+  services.power-profiles-daemon.enable = true;
+
   fileSystems."/run/media/tinsuki/windows" = {
     device = "/dev/disk/by-uuid/962876D12876AFBB";
+    fsType = "ntfs-3g";
+    options = [ "rw" "uid=1000" ];
+  };
+
+  fileSystems."/run/media/tinsuki/jeux" = {
+    device = "/dev/disk/by-uuid/CC7622147621FFB6";
     fsType = "ntfs-3g";
     options = [ "rw" "uid=1000" ];
   };

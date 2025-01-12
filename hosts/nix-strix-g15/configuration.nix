@@ -1,5 +1,4 @@
 { config, lib, pkgs, inputs,... }:
-
 {
   imports =
     [ 
@@ -27,6 +26,10 @@
   environment.interactiveShellInit = ''
     export PATH=$PATH:/usr/bin
   '';
-  
-  system.stateVersion = "24.05";
+
+  environment.variables.PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
+  environment.variables.PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
+  environment.variables.PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
+
+  system.stateVersion = "24.11";
 }

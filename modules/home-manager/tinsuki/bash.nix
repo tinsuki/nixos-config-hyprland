@@ -5,17 +5,62 @@
   programs.bash = {
     
     shellAliases = {
+      # ls shortcuts
       l = "ls -alh";
       ll = "ls -l";
       ls = "ls --color=tty";
+      la = "ls -A";
+      lla = "ls -al";
+
+      # nix shortcuts
       remove-tofi-cache = "rm /home/tinsuki/.cache/tofi-*";
+      clear_dotfiles_history = "sudo rm -rf ~/.dotfiles.back.*";
+      clear_nix_config_history = "sudo rm -rf /etc/nixos.back.*";
+      clean-garbage = "nix-env --delete-generations -p /home/tinsuki/.local/state/nix/profiles/home-manager/ old && nix-env --delete-generations -p /home/tinsuki/.local/state/nix/profiles/profile/ old && sudo nix-env --delete-generations --profile /nix/var/nix/profiles/system-profiles/gnome old && sudo nix-env --delete-generations --profile /nix/var/nix/profiles/system-profiles/hyprland old && sudo nix-collect-garbage";
+      clean-os="clean-garbage && clear_nix_config_history && clear_dotfiles_history";
+      # clear and fastfetch
       cleart = "clear && fastfetch";
       clr = "clear && fastfetch";
       c = "clear && fastfetch";
+
+      # Docker compose shortcuts
+      dc = "docker compose";
+      # start containers with docker compose
       dcu = "docker compose up";
+      # start containers with docker compose detached
       dcud = "docker compose up -d";
+      # build and start containers with docker compose
       dcub = "docker compose up --build";
+      # build and start containers with docker compose detached
       dcubd = "docker compose up --build -d";
+      # remove containers with docker compose
+      dcrm = "docker compose rm";
+      # restart containers with docker compose
+      dcrs = "docker compose restart";
+      # rebuild containers with docker compose
+      dcrb = "docker compose rebuild";
+      # run command in containers with docker compose
+      dcr = "docker compose run";
+      # stop containers with docker compose
+      dcd = "docker compose down";
+      # exec command in containers with docker compose
+      dce = "docker compose exec";
+      # logs of containers with docker compose
+      dcl = "docker compose logs";
+      # ps of containers with docker compose
+      dcp = "docker compose ps";
+      # top of containers with docker compose
+      dct = "docker compose top";
+      # images of containers with docker compose
+      dci = "docker compose images";
+      # pull images of containers with docker compose
+      dcip = "docker compose pull";
+      # build images of containers with docker compose
+      dcib = "docker compose build";
+      # push images of containers with docker compose
+      dcipu = "docker compose push";
+
+
       # Get latest container ID
       dl="docker ps -l -q";
       # Get container process
@@ -77,14 +122,45 @@
     };
 
     bashrcExtra = ''
-      eval "$(oh-my-posh init bash --config /home/tinsuki/.config/oh-my-posh/config.json)"
+      # Enable OyMyPosh with installede configuration
+      eval "$(oh-my-posh init bash --config ~/.dotfiles/oh-my-posh/config.json)"
+
+      # Show docker and docker compose aliases
+      dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/" | sed "s/['|\']//g" | sort; }
     
-      if [[ -n $KITTY_WINDOW_ID && $(tput lines) -ge 43 && $(tput cols) -ge 92 ]]; then
+      # Start fastfetch if terminal is big enough
+      if [[ $(tput lines) -ge 43 && $(tput cols) -ge 92 ]]; then
 	      fastfetch
       fi
 
-      # Show all alias related docker
-      dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/" | sed "s/['|\']//g" | sort; };
+      # Export TERM=xterm-256color for kitty terminal ssh sessions
+      [[ "$TERM" == "xterm-kitty" ]] && alias ssh="TERM=xterm-256color ssh" 
+
+      # Export flutter & flutter related path
+      flutter_sdk=$(readlink -f $(which flutter) | awk '{sub(/\/flutter$/,"")}1')
+      export PATH="$flutter_sdk:$PATH";
+      export CHROME_EXECUTABLE="$(which chromium)"; 
+
+      # Export Android related paths
+      export ANDROID_HOME="/home/tinsuki/Android/Sdk";
+
+      # Export Deno related paths
+      export PATH="/home/tinsuki/.deno/bin:$PATH"
     '';
   };
+
+  # Make OhMyPosh integrated w/ bash
+  programs.oh-my-posh.enableBashIntegration = true;
+
+  # Make Zoxide available to bash
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
+    options = [
+      "--cmd cd"
+    ];
+  };
+
+  # Make FZF available to bash
+  programs.fzf.enable = true;
 }

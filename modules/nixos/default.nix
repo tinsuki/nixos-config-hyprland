@@ -3,18 +3,18 @@
 
 {
   imports = [
+    ./audio.nix
     ./boot.nix
-    ./firewall.nix
+    ./bluetooth.nix
     ./fonts.nix
     ./hardware.nix
     ./hyprland.nix
-    ./keyboard.nix
     ./network.nix
-    ./packages.nix
     ./ssh.nix
-    ./time.nix
-    # ./users.nix
+    ./locales.nix
+    ./terminal.nix
     ./virt.nix
     ./xserver.nix
+    ./packages
   ];
 }

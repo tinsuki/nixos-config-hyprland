@@ -5,8 +5,8 @@
   imports = [
     ./bash.nix
     ./config-files.nix
-    ./user-packages.nix
     ./default-apps.nix
     ./gnome.nix
+    ./nvim.nix
   ];
 }

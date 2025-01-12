@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
-{
+{ inputs, config, lib, pkgs, ... }: { 
+
+  # Set your time zone.
+  time.timeZone = "Europe/Paris";
+
+  ## Select internationalisation properties - Set to pure french.
   i18n.defaultLocale = "fr_FR.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -13,4 +17,13 @@
     LC_TELEPHONE = "fr_FR.UTF-8";
     LC_TIME = "fr_FR.UTF-8";
   };
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "fr";
+    variant = "azerty";
+  };
+
+  # Configure console keymap
+  console.keyMap = "fr";
 }

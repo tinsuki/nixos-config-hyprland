@@ -10,4 +10,6 @@
   };
 
   console.keyMap = "fr";
+
+  services.xserver.videoDrivers = [ "nvidia" ];
 }
